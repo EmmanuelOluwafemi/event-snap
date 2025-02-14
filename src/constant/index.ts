@@ -1,0 +1,5 @@
+
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export { CONTRACT_ADDRESS, API_URL };
