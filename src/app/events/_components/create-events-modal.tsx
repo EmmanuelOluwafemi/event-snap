@@ -25,17 +25,25 @@ export const CreateEventsModal = () => {
   const { mutate, status } = useUploadImage();
 
   const uploadImage = async (file: File) => {
-    const formData = new FormData();
-    formData.append("image", file);
+    const formData = new FormData()
+    formData.append("image", file, file.name)
+    
+    console.log('FormData contents:')
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1])
+    }
 
     mutate(formData, {
       onSuccess: (data) => {
-        console.log(data);
+        console.log('Upload success:', data)
       },
-    });
-
-    // TODO: RETRIEVE THE IMAGE IPFS URL
-    // return `https://ipfs.infura.io/ipfs/${result.cid}`;
+      onError: (error) => {
+        console.error('Upload error:', error)
+      },
+      // headers: {
+      //   'Content-Type': 'multipart/form-data',
+      // }
+    })
   };
 
   const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,6 +57,8 @@ export const CreateEventsModal = () => {
 
     const image = files[0];
 
+    console.log("image", image);
+
     const imageIpfsUrl = await uploadImage(image);
 
     console.log(imageIpfsUrl);
@@ -59,6 +69,8 @@ export const CreateEventsModal = () => {
     // TODO: CLOSE THE MODAL
     // TODO: REFRESH THE EVENTS LIST
   };
+
+  console.log("files", files);
 
   return (
     <Dialog>

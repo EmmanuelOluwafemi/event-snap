@@ -63,7 +63,7 @@ export default {
   			}
   		},
   		animation: {
-  			shake: 'shake 3s ease-in-out infinite'
+  			shake: 'shake 2s ease-in-out infinite'
   		}
   	}
   },
